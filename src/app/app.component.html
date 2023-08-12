@@ -1,21 +1,12 @@
-<h1>Hello Signal!</h1>
-
-<p>X: {{ x() }}</p>
-<p>Y: {{ y() }}</p>
-<p>Z: {{ z() }}</p>
-
-<h2>Quantity: {{quantity()}}</h2>
-<h2>Quantity available: 
-  <select>
-    <option *ngFor="let q of qtyAvailable()">
-      {{q}}
-    </option>
-  </select>
-</h2>
+<h1>Shopping cart</h1>
+<select 
+  [ngModel]="quantity()"
+  (change)="onQuantitySelected($any($event.target).value)">
+  <option disabled value="">--Select a quantity--</option>
+  <option *ngFor="let q of qtyAvailable()">{{q}}</option>
+</select>
 <div *ngIf="selectedVehicle() as vehicle">
   <h4>Vehicle: {{ vehicle.name }}</h4>
-  <ul>
-    <li>Id: {{ vehicle.id }}</li>
-    <li>Price: {{ vehicle.price }}</li>
-  </ul>
+  <h4>Price: {{ vehicle.price }}</h4>
 </div>
+<h3>Total price: {{ exPrice() | number: '1.2-2' }}</h3>
